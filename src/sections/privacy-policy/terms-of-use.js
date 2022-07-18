@@ -713,11 +713,28 @@ function TermsAndCondition() {
                 <ul>
                   {data.content &&
                     data.content.map((a) => {
-                      return <InfoList>{a}</InfoList>;
+                      return <InfoList>{a}</InfoList>
                     })}
                 </ul>
               )
             )}
+
+            {
+              (data.title === "Disclaimers and Limitations on Our Liability") && (
+                <>
+                  {
+                    data.content[0].bulletPoints.map((item)=>(
+                       <ul>
+                        <li style={{marginBottom:'50px'}}>
+                          <strong>{item}</strong>
+                        </li>
+                       </ul>
+                    ))
+                  }
+                </>
+              )
+            }
+
             {(data.title === "Services" || data.title === "Acceptable Use") && (
               <>
                 {data.content.map(({ heading, points, subPoints, point }) => {
