@@ -8,6 +8,20 @@ import {
   link,
 } from "../../constants/PrivacyPolicyData";
 
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  subTitle: {
+    marginBottom: "50px"
+  },
+  point: {
+    margin: "0px"
+  },
+  bottomSpace: {
+    marginBottom: '30px'
+  }
+})
+
 const Container = styled("div")(({ theme }) => ({
   height: "88vh",
   maxHeight: "fit-content",
@@ -21,7 +35,6 @@ const View = styled("div")(({ theme }) => ({
 
 const Title = styled("div")(({ theme }) => ({
   fontSize: "30px",
-
   textAlign: "center",
   fontWeight: "400px",
   margin: "0 0 15px",
@@ -29,7 +42,7 @@ const Title = styled("div")(({ theme }) => ({
 }));
 
 const InfoList = styled("li")(({ theme, underline }) => ({
-  margin: "0 0 15px",
+  margin: "0 0 50px",
   fontSize: "16px",
   textDecoration: underline && "underline",
 }));
@@ -44,6 +57,8 @@ const ParaGraph = styled("p")(({ theme }) => ({
   fontSize: "16px",
 }));
 
+
+// ------------------------------------first para----------------------------------------------------
 const firstPara = () => {
   return (
     <>
@@ -80,6 +95,8 @@ const firstPara = () => {
   );
 };
 
+
+// -------------------------------------------second para---------------------------------------
 const secondPara = () => {
   return (
     <>
@@ -98,6 +115,8 @@ const secondPara = () => {
   );
 };
 
+
+// --------------------------------------third para ------------------------------------------------
 const thirdPara = () => {
   return (
     <>
@@ -114,7 +133,13 @@ const thirdPara = () => {
   );
 };
 
+
+
+//---------------------------------------------TermsAndCondition------------------------------------
 function TermsAndCondition() {
+
+  const classes = useStyles()
+
   const useOfService = () => {
     return (
       <>
@@ -299,7 +324,7 @@ function TermsAndCondition() {
       content: [
         {
           heading: "Sale of Veterinary Products:",
-          points: [
+          point: [
             `The Company lists various Products for sale on the Platform. Such listing of Products on the Platform is merely an ‘invitation to offer’ and not an ‘offer for sale’. The Products include over-the-counter medicines as well as prescription medicines. The Platform has duly obtained all licenses and registrations as may be required to undertake its business and abides by all the applicable laws including relating to the dispensing of prescription medicines.`,
             `By placing an order for the Products, You make an offer to the Company to buy such Products. We may accept or decline any order placed by You, in Our sole discretion, without any liability to You. We further reserve the right to limit the order quantity of any Products available on the Platform, without any prior notice.`,
             `All prescription medicines shall be sold and dispensed by a registered pharmacist at the Company.`,
@@ -310,7 +335,7 @@ function TermsAndCondition() {
         },
         {
           heading: "Teleconsultation Services:",
-          points: [
+          point: [
             `The Company facilitates veterinary teleconsultation for the pets through the Consultants, listed on the Platform. The Consultants may be listed on the Platform, either directly or through a third party. Platform enables the Users to connect with the Consultants through the Platform by various modes including video, or the telephonic service, as may be available on the Platform.`,
             `While We do check and authenticate the veterinarians listed on the Platform, You should independently also verify the credential of the Consultants and We are not liable for the same. Further, the Platform may have veterinarians from countries other than India, listed on the Platform, who may not be registered under the Indian laws to provide the veterinarian services. However, if You choose to procure the Services from such veterinarians, You hereby agree and acknowledge that consultation provided by such foreign Consultants is advisory in nature and should not be considered as a medical opinion.`,
             `You hereby agree and acknowledge that the Platform is an intermediary that facilitates the provision of veterinary teleconsultation services on the Platform and is in no manner involved in providing such teleconsultation services to You. The Consultants are independent professionals and such services are being provided solely by them to the relevant pet. Therefore, they are responsible for the teleconsultation services rendered to the patient and the Company or the Platform is not in any manner liable for the consultations provided by such Consultants through the Platform including diagnosis, prescription, medication, and treatment prescribed to the patient and/or for their compliance with applicable laws.`,
@@ -337,7 +362,7 @@ function TermsAndCondition() {
             "a record of physical examination and report thereof with You, generated through local veterinarian of the patient; and",
             "consultation with local veterinarian of the patient before abandoning or modifying any ongoing treatment.",
           ],
-          points: [
+          point: [
             `You agree that by using the Platform, the Consultant will not be conducting physical examination of the patient, hence, they may not have or be able to derive important information that is usually obtained through a physical examination. You hereby acknowledge and agree that You are aware of these limitations and agree to assume the complete risk of these limitations.`,
             `You agree that all details provided by You during the course of availing Services on the Platform will be honest, accurate and complete. You further acknowledge and understand that misrepresentation of information or not providing all or complete details in relation to or for availing the Services may lead to inaccurate diagnosis and treatment and consequently inaccurate prescription. You agree to indemnify and hold harmless the Company and its directors, officers, and agents from and against any and all claims, proceedings, losses, penalties, liabilities, and damages arising due to or in relation to Your breach of this Clause.`,
           ],
@@ -349,7 +374,7 @@ function TermsAndCondition() {
       content: [
         {
           //   heading: "",
-          points: [
+          point: [
             `The Service permits You to buy the Products available on the Platform and/or to available veterinary teleconsultation provided by registered Consultants.`,
             `You represent and warrant that You shall not:`,
             // ``,
@@ -387,7 +412,7 @@ function TermsAndCondition() {
       content: [
         {
           //   heading: "Fees and Payment",
-          points: [
+          point: [
             {
               underlineHeading: "Fees",
               subPoint: `The fee for the Services and the Products is as specified on the Platform. You agree to pay all amounts due in accordance with the payment terms in effect when You purchase any Service or Products.`,
@@ -613,13 +638,13 @@ function TermsAndCondition() {
       <>
         {
           <li>
-            <span style={{ display: "flex" }}>
+            <span style={{ display: "flex", marginBottom:'30px'}}>
               <span>
                 <span style={{ textDecoration: "underline" }}>
                   {" "}
                   {underlineHeading}
                 </span>
-                {": "} <span style={{ textDecoration: "none" }}>{data}</span>
+                {": "} <span style={{ textDecoration: "none", }}>{data}</span>
               </span>
             </span>
           </li>
@@ -679,8 +704,8 @@ function TermsAndCondition() {
               </InfoList>
             </ol>
             {additionalPoints(data) &&
-            data.content &&
-            data.content.length === 1 ? (
+              data.content &&
+              data.content.length === 1 ? (
               <ParaGraph>{data.content[0]}</ParaGraph>
             ) : (
               additionalPoints(data) && (
@@ -694,7 +719,7 @@ function TermsAndCondition() {
             )}
             {(data.title === "Services" || data.title === "Acceptable Use") && (
               <>
-                {data.content.map(({ heading, points, subPoints }) => {
+                {data.content.map(({ heading, points, subPoints, point }) => {
                   return (
                     <>
                       {heading && (
@@ -705,20 +730,34 @@ function TermsAndCondition() {
                       )}
                       {subPoints && (
                         // ordered list
-                        <ol>
+                        <ol >
                           {subPoints.map((point) => {
                             return <li>{point}</li>;
                           })}
                         </ol>
                       )}
-                      {points &&
-                        points.map((point) => {
+                      {points ?
+                        (points.map((point) => {
                           return (
-                            <ul>
-                              <InfoList>{point}</InfoList>
+                            <ul className={classes.point}>
+                              <li>{point}</li>
+                              {/* <InfoList>{point}</InfoList> */}
                             </ul>
                           );
-                        })}
+                        })) : (
+                          <>
+                            <div>
+                              {
+                                point && point.map((data, index) => (
+                                  <ul>
+                                    <InfoList>{data}</InfoList>
+                                  </ul>
+                                ))
+                              }
+                            </div>
+                            <p className={classes.bottomSpace}>&nbsp;</p>
+                          </>
+                        )}
                     </>
                   );
                 })}
@@ -728,7 +767,7 @@ function TermsAndCondition() {
             {data.title === "Fees and Payment" && (
               <>
                 {data.content &&
-                  data.content.map(({ heading, points, bulletPoints }) => {
+                  data.content.map(({ heading, points, bulletPoints,point }) => {
                     return (
                       <>
                         {heading && (
@@ -736,9 +775,9 @@ function TermsAndCondition() {
                             <InfoList underline="true">{heading}</InfoList>
                           </ul>
                         )}
-                        {points && (
+                        {point && (
                           <ul>
-                            {points.map(({ underlineHeading, subPoint }) => {
+                            {point.map(({ underlineHeading, subPoint }) => {
                               return (
                                 <>
                                   {underlineHeading !== "Payment Questions" &&
@@ -756,6 +795,7 @@ function TermsAndCondition() {
                               </ul>
                             );
                           })}
+                          {/* -------------------------- */}
                         {points && (
                           <ul>
                             {points.map(({ underlineHeading, subPoint }) => {
@@ -768,6 +808,7 @@ function TermsAndCondition() {
                             })}
                           </ul>
                         )}
+                        {/* --------------------- */}
                       </>
                     );
                   })}
@@ -804,7 +845,7 @@ function TermsAndCondition() {
                             }
                             return (
                               <ul>
-                                <InfoList>{bulletPoint}</InfoList>
+                                <li>{bulletPoint}</li>
                               </ul>
                             );
                           })}
@@ -819,50 +860,50 @@ function TermsAndCondition() {
             {(data.title === "License to Use the Service and Platform" ||
               data.title === "Third Party Content and Interactions" ||
               data.title === "Suspension and Termination") && (
-              <>
-                {data.content &&
-                  data.content.map(({ heading, bulletPoints }) => {
-                    return (
-                      <>
-                        {heading && (
-                          <ul>
-                            <InfoList underline="true">{heading}</InfoList>
-                          </ul>
-                        )}
-                        {bulletPoints &&
-                          bulletPoints.map((bulletPoint) => {
-                            return (
-                              <ul>
-                                <InfoList>{bulletPoint}</InfoList>
-                              </ul>
-                            );
-                          })}
-                      </>
-                    );
-                  })}
-              </>
-            )}
+                <>
+                  {data.content &&
+                    data.content.map(({ heading, bulletPoints }) => {
+                      return (
+                        <>
+                          {heading && (
+                            <ul>
+                              <InfoList underline="true">{heading}</InfoList>
+                            </ul>
+                          )}
+                          {bulletPoints &&
+                            bulletPoints.map((bulletPoint) => {
+                              return (
+                                <ul>
+                                  <InfoList>{bulletPoint}</InfoList>
+                                </ul>
+                              );
+                            })}
+                        </>
+                      );
+                    })}
+                </>
+              )}
             {(data.title === "Links" ||
               data.title === "Changes to the Platform" ||
               data.title === "Termination and Reservation of Rights" ||
               data.title === "Violation of the Terms" ||
               data.title === "Changes to these Terms") && (
-              <>
-                {data.content &&
-                  data.content.map(({ heading, paragraph }) => {
-                    return (
-                      <>
-                        {heading && (
-                          <ul>
-                            <InfoList underline="true">{heading}</InfoList>
-                          </ul>
-                        )}
-                        <ParaGraph>{paragraph}</ParaGraph>
-                      </>
-                    );
-                  })}
-              </>
-            )}{" "}
+                <>
+                  {data.content &&
+                    data.content.map(({ heading, paragraph }) => {
+                      return (
+                        <>
+                          {heading && (
+                            <ul>
+                              <InfoList underline="true">{heading}</InfoList>
+                            </ul>
+                          )}
+                          <ParaGraph>{paragraph}</ParaGraph>
+                        </>
+                      );
+                    })}
+                </>
+              )}{" "}
             {data.title === "Other Provisions" && (
               <>
                 {data.content &&
@@ -890,13 +931,13 @@ function TermsAndCondition() {
             )}
             {(data.title === "Grievance Redressal" ||
               data.title === "Communications") && (
-              <>
-                {data.paragraph &&
-                  data.paragraph.map((para, index) => {
-                    return <ParaGraph key={index}>{para}</ParaGraph>;
-                  })}
-              </>
-            )}
+                <>
+                  {data.paragraph &&
+                    data.paragraph.map((para, index) => {
+                      return <ParaGraph key={index}>{para}</ParaGraph>;
+                    })}
+                </>
+              )}
           </div>
         ))}
       </View>
