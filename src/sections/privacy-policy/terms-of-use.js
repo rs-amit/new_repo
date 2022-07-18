@@ -41,10 +41,11 @@ const Title = styled("div")(({ theme }) => ({
   letterSpacing: "0.0em",
 }));
 
-const InfoList = styled("li")(({ theme, underline }) => ({
+const InfoList = styled("li")(({ theme, underline, marginTop }) => ({
   margin: "0 0 50px",
   fontSize: "16px",
   textDecoration: underline && "underline",
+  marginTop:marginTop && '30px'
 }));
 
 const OrderedList = styled("ol")(({ theme }) => ({
@@ -381,7 +382,7 @@ function TermsAndCondition() {
           ],
         },
         {
-          heading: "upload, publish, transmit, update or share information;",
+          heading: "upload, publish, transmit, update or share information",
           subPoints: [
             `that belongs to another person and to which You do not have any right;`,
             `that is, or that incites or encourages, action that is, explicitly or implicitly: illegal, harmful, abusive, insulting, harassing, threatening, hateful, racially or ethnically objectionable, derogatory, harmful to any reputation, disparaging, defamatory, libelous, pornographic, indecent, profane, obscene, pedophilic or otherwise objectionable (including nudity), blasphemous, invasive of another's privacy, including bodily injury, or relating or encouraging money laundering or gambling; and`,
@@ -411,7 +412,7 @@ function TermsAndCondition() {
       title: "Fees and Payment",
       content: [
         {
-          //   heading: "Fees and Payment",
+          // heading: "Fees and Payment",
           point: [
             {
               underlineHeading: "Fees",
@@ -698,9 +699,9 @@ function TermsAndCondition() {
         <ParaGraph>{thirdPara()}</ParaGraph>
         {termsOfService.map((data, index) => (
           <div key={index}>
-            <ol>
-              <InfoList>
-                <strong>{data.title}</strong>
+            <ol style={{marginTop:(data.title === "Fees and Payment" || data.title === "Privacy") && "40px"}}>
+              <InfoList >
+                <strong >{data.title}</strong>
               </InfoList>
             </ol>
             {additionalPoints(data) &&
@@ -725,7 +726,7 @@ function TermsAndCondition() {
                       {heading && (
                         // unOrdered list
                         <ul>
-                          <InfoList underline="true">{heading}</InfoList>
+                          <InfoList underline="true" style={{marginBottom: heading === "upload, publish, transmit, update or share information" && "0px"}}>{heading}</InfoList>
                         </ul>
                       )}
                       {subPoints && (
@@ -755,7 +756,7 @@ function TermsAndCondition() {
                                 ))
                               }
                             </div>
-                            <p className={classes.bottomSpace}>&nbsp;</p>
+                            {/* <p className={classes.bottomSpace}>&nbsp;</p> */}
                           </>
                         )}
                     </>
@@ -772,7 +773,7 @@ function TermsAndCondition() {
                       <>
                         {heading && (
                           <ul>
-                            <InfoList underline="true">{heading}</InfoList>
+                            <InfoList underline="true" marginTop="30px">{heading}</InfoList>
                           </ul>
                         )}
                         {point && (
@@ -815,6 +816,7 @@ function TermsAndCondition() {
               </>
             )}
             {data.title === "Ownership" && OwnershipSection()}
+            {/* ------------------------------------------------------------------------------------------------------- */}
             {data.title === "Copyright and Intellectual Property Policy" && (
               <>
                 {data.content &&
@@ -841,11 +843,11 @@ function TermsAndCondition() {
                               bulletPoint ===
                               "If You do not follow these requirements, Your notice may not be valid."
                             ) {
-                              return <ParaGraph>{bulletPoint}</ParaGraph>;
+                              return <ParaGraph style={{marginTop:'40px'}}>{bulletPoint}</ParaGraph>;
                             }
                             return (
-                              <ul>
-                                <li>{bulletPoint}</li>
+                              <ul style={{margin:'0px'}}>
+                                <li >{bulletPoint}</li>
                               </ul>
                             );
                           })}
