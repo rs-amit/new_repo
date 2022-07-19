@@ -8,6 +8,7 @@ import Footer from "./footer";
 import EightSection from "./eigthSection";
 import SixthSection from "./sixthSection";
 
+
 const HomePage = () => {
   return (
     <>

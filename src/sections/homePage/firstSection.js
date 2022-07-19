@@ -14,6 +14,15 @@ import { Link } from "react-scroll";
 import HorizontalLine from "./../../component/horizontalLine";
 import LeftRightIcons from "./../../component/leftRightIcons";
 import "./../../App.css";
+import { makeStyles } from "@mui/styles";
+
+// const useStyles = makeStyles({
+//   slide:{
+//     display:'flex',
+//     justifyContent:'center'
+//     // width:'fit-content'
+//   }
+// })
 
 const MobileView = styled("div")(
   ({ theme, laptopbannerimgheight, mobilebannerimgheight }) => ({
@@ -143,12 +152,12 @@ const SubHeadingWrapper = styled(Typography)(({ theme }) => ({
   },
 }));
 
-function FirstSection({
-  setScroll,
-  isScroll,
-  laptopbannerimgheight,
-  mobilebannerimgheight,
-}) {
+
+// -------------------------------------------------------------------------------------------------------------
+
+function FirstSection({setScroll, isScroll, laptopbannerimgheight, mobilebannerimgheight }) {
+
+
   const allData = [
     {
       image: BannerImage,
@@ -162,11 +171,37 @@ function FirstSection({
   ];
   const [data, setData] = useState(allData);
 
-  useEffect(() => {
-    setTimeout(() => {
-      onChange("next");
-    }, 5000);
-  }, [data]);
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const SlideLength = allData.length;
+  const autoScroll = true;
+  let slideInterval;
+
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     onChange("next");
+  //   }, 5000);
+  // }, [data]);
+
+
+
+  const nextHandler=()=>{
+    setCurrentSlide(currentSlide === SlideLength-1 ? 0 :(currentSlide + 1))
+  } 
+  const prevHandler=()=>{
+    setCurrentSlide(currentSlide === 0 ? SlideLength-1 : currentSlide - 1)
+  } 
+
+  function auto(){
+    slideInterval = setInterval(nextHandler , 5000)
+  }
+
+  useEffect(()=>{
+    if(autoScroll){
+      auto()
+    }
+    return () => clearInterval(slideInterval) 
+  },[currentSlide])
 
   const laptopView = () => {
     return (
@@ -178,11 +213,23 @@ function FirstSection({
         alignItems="center"
       >
         <Grid item xs={12} sm={12} display="flex" justifyContent="center">
-          <ImageView
+          {
+            allData.map((data, index)=>(
+                  index === currentSlide && (
+                    <ImageView
+                      alt="girl-image"
+                      src={data.image}
+                      style={{ position: "relative" }}
+                    />
+                  )
+            ))
+            
+          }
+          {/* <ImageView
             alt="girl-image"
             src={data[0].image}
             style={{ position: "relative" }}
-          />
+          /> */}
 
           <Box sx={{ display: { xs: "none", sm: "none", md: "flex" } }}>
             <BlurredComponent
@@ -229,8 +276,10 @@ function FirstSection({
               borderradius="0px 12px"
             />
             <LeftRightIcons
-              onRightClick={() => onChange("next")}
-              onLeftClick={() => onChange("back")}
+              onRightClick={nextHandler}
+              onLeftClick={prevHandler}
+              // onRightClick={() => onChange("next")}
+              // onLeftClick={() => onChange("back")}
             />
           </Box>
         </Grid>
@@ -249,8 +298,10 @@ function FirstSection({
           }}
         >
           <LeftRightIcons
-            onRightClick={() => onChange("next")}
-            onLeftClick={() => onChange("back")}
+              onRightClick={() => onChange("next")}
+              onLeftClick={() => onChange("back")}
+            // onRightClick={() => onChange("next")}
+            // onLeftClick={() => onChange("back")}
           />
           <div style={{ display: "inline" }}>
             <Typography
@@ -265,7 +316,7 @@ function FirstSection({
               fontSize="32px"
               fontWeight="bold"
               color="#013773"
-              fontWeight="900"
+              // fontWeight="900"
               style={{ display: "inline" }}
             >
               {` `}
@@ -307,6 +358,8 @@ function FirstSection({
     setScroll(!isScroll);
   };
 
+  // -----------------------------------------------------------------------------------------------
+
   const onChange = (val) => {
     const newData = [...data];
 
@@ -322,6 +375,8 @@ function FirstSection({
       setData(newData);
     }
   };
+
+  // ------------------------------------------------------------------------------------------------
 
   return (
     <>
