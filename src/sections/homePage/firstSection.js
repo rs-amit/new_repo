@@ -153,8 +153,6 @@ const SubHeadingWrapper = styled(Typography)(({ theme }) => ({
 }));
 
 
-// -------------------------------------------------------------------------------------------------------------
-
 function FirstSection({setScroll, isScroll, laptopbannerimgheight, mobilebannerimgheight }) {
 
 
@@ -298,8 +296,8 @@ function FirstSection({setScroll, isScroll, laptopbannerimgheight, mobilebanneri
           }}
         >
           <LeftRightIcons
-              onRightClick={() => onChange("next")}
-              onLeftClick={() => onChange("back")}
+              onRightClick={nextHandler}
+              onLeftClick={prevHandler}
             // onRightClick={() => onChange("next")}
             // onLeftClick={() => onChange("back")}
           />

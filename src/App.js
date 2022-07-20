@@ -6,7 +6,10 @@ import NavBar from "./sections/navbar";
 import HomePage from "./sections/homePage/index";
 import PrivacyPolicy from "./sections/privacy-policy/index";
 import TermsAndCondition from "./sections/privacy-policy/terms-of-use";
+import OurServices from "./sections/OurServices/OurServices"
+
 import "./App.css";
+
 
 const FabIconComponent = lazy(() => import("./component/fabButton"));
 
@@ -23,6 +26,7 @@ function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/home-page" element={<HomePage />} />
+        <Route path="/our-services" element={<OurServices />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsAndCondition />} />
       </Routes>
