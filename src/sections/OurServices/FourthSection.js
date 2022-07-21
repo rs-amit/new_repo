@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/material/styles";
 import Slider from "react-slick";
@@ -18,28 +18,82 @@ import { border, borderRadius, display, margin, padding, width } from '@mui/syst
 
 const useStyles = makeStyles({
     slideContainer: {
-        // border:'1px solid black',
-        maxWidth: '90%',
+        maxWidth: '80%',
         margin: 'auto',
+        "@media (max-width: 1000px)": {
+            maxWidth: '90%', 
+        },
     },
     img: {
-        minHeight: '260px',
+        minHeight: '250px',
         fitContent: 'cover',
         transform: 'scale(0.5)',
         borderRadius: "50%",
         opacity: '8',
+        "@media (max-width: 1225px)": {
+            minHeight: '200px',
+        },
+        "@media (max-width: 1000px)": {
+            minHeight: '175px',
+        },
+        "@media (max-width: 800px)": {
+            minHeight: '155px',
+        },
+        "@media (max-width: 700px)": {
+            minHeight: '135px',
+        },
+        "@media (max-width: 500px)": {
+            minHeight: '100px',
+            transform: 'scale(0.6)',
+        },
+        "@media (max-width: 450px)": {
+            minHeight: '80px',
+        },
+        "@media (max-width: 350px)": {
+            minHeight: '60px',
+        },
+
 
     },
     imgActive: {
-        minHeight: '290px',
+        minHeight: '250px',
         fitContent: 'content',
         transform: 'scale(0.8)',
         opacity: '10',
-        borderRadius: "50%"
+        borderRadius: "50%",
+        "@media (max-width: 1225px)": {
+            minHeight: '200px',
+        },
+        "@media (max-width: 1000px)": {
+            minHeight: '175px',
+        },
+        "@media (max-width: 800px)": {
+            minHeight: '155px',
+        },
+        "@media (max-width: 700px)": {
+            minHeight: '135px',
+        },
+        "@media (max-width: 500px)": {
+            minHeight: '100px',
+            transform: 'scale(0.9)',
+        },
+        "@media (max-width: 450px)": {
+            minHeight: '80px',
+        },
+        "@media (max-width: 350px)": {
+            minHeight: '60px',
+        },
+
     },
     mainTitle: {
         fontSize: "35px",
-        margin: '5px 0'
+        margin: '5px 0',
+        "@media (max-width: 1000px)": {
+            fontSize:'30px'
+        },
+        "@media (max-width: 500px)": {
+            fontSize:'25px'
+        },
     },
     titleStrong: {
         fontWeight: "700",
@@ -47,36 +101,88 @@ const useStyles = makeStyles({
         display: 'inline',
     },
     next: {
-        // border:'1px solid black',
         width: 'fit-content',
-        position: 'absolute',
-        right: '5px',
-        top: '40%',
         cursor: 'pointer',
-
+        position: 'absolute',
+        right: '-20px',
+        top: '45%',
+        "@media (max-width: 1225px)": {
+            top: '42%',
+        },
+        "@media (max-width: 700px)": {
+            top: '40%',
+        },
+        "@media (max-width: 500px)": {
+            top: '38%',
+        },
+        "@media (max-width: 350px)": {
+            top: '35%',
+        },
 
     },
     prev: {
-        // border:'1px solid black',
         width: 'fit-content',
-        position: 'absolute',
-        left: '5px',
         top: '40%',
         cursor: 'pointer',
+        position: 'absolute',
+        left: '-20px',
+        top: '45%',
+        "@media (max-width: 1225px)": {
+            top: '42%',
+        },
+        "@media (max-width: 700px)": {
+            top: '40%',
+        },
+        "@media (max-width: 500px)": {
+            top: '38%',
+        },
+        "@media (max-width: 350px)": {
+            top: '32%',
+        },
     },
     scrolInfo: {
-        fontSize: '16px',
+        fontSize: '24px',
+        margin:'0 0 10px 0',
+        "@media (max-width: 500px)": {
+            fontSize: '16px',
+        },
+    },
+    scrolhead:{
+        fontSize:'30px',
+        margin:'3px',
+        "@media (max-width: 500px)": {
+            fontSize: '14px',
+        },
+    },
+    scrolSnap:{
+        fontSize:'30px',
+        "@media (max-width: 500px)": {
+            fontSize: '12px',
+        },
+
+    },
+    arrowImg:{
+        width:'25px',
+        "@media (max-width: 700px)": {
+            width:'20px',
+        },
+        "@media (max-width: 500px)": {
+            width:'17px',
+        },
+        "@media (max-width: 350px)": {
+            width:'15px',
+        },
     }
+
+
 })
 
 const Container = styled("div")({
-    //    border:'1px solid black',
-    padding: '20px 0'
+    padding: '20px 10px'
 });
 
 
 const Title = styled('div')({
-    //    border:'1px solid black',
     maxWidth: "90%",
     margin: 'auto',
     display: 'flex',
@@ -88,7 +194,6 @@ const Title = styled('div')({
 })
 
 const TextInfoField = styled('div')({
-    // border: '1px solid black',
     maxWidth: '90%',
     margin: 'auto',
     textAlign: 'center',
@@ -96,26 +201,43 @@ const TextInfoField = styled('div')({
 })
 
 const InnerTextField = styled('div')({
-    // border: '1px solid black',
     maxWidth: '75%',
     margin: 'auto',
     textAlign: 'center',
 })
 
-// ----------------------------------------------------------------------------------------------------
+
 const ImgArray = [img1, img2, img3, img4, img5, img6]
 
 function FourthSection() {
-
     const [currentImg, setCurrentImg] = useState(0)
+    const [scale, setScale] = useState([])
 
     const classes = useStyles()
+
+    useEffect(()=>{
+        let total_number_of_carts = 5;
+        let middle_carts_by_index = Math.floor(total_number_of_carts / 2)
+        let new_scale = [];
+
+        for (let i = 0; i < 5; i++) {
+            if (i < middle_carts_by_index) { //left side deck 
+                (Math.pow(0.95, (middle_carts_by_index - i)))
+                new_scale.push(Math.pow(0.95, (middle_carts_by_index - i)))
+
+            }else{
+                setScale(Math.pow(0.95, (i - middle_carts_by_index)))
+                new_scale.push(Math.pow(0.95, (i - middle_carts_by_index)))
+            }
+        }
+
+    },[])
 
 
     const NextArrow = ({ onClick }) => {
         return (
             <div className={classes.next} onClick={onClick}>
-                <img src={arrowImg1} alt="" style={{width:'25px'}}/>
+                <img src={arrowImg1} alt="" className={classes.arrowImg} />
             </div>
         )
     }
@@ -123,7 +245,7 @@ function FourthSection() {
     const PrevArrow = ({ onClick }) => {
         return (
             <div className={classes.prev} onClick={onClick}>
-                <img src={arrowImg2} alt="" style={{width:'25px'}}/>
+                <img src={arrowImg2} alt="" className={classes.arrowImg}/>
             </div>
         )
     }
@@ -153,6 +275,9 @@ function FourthSection() {
                             src={img}
                             alt=""
                             className={index === currentImg ? classes.imgActive : classes.img}
+                            style={{
+                                transform:`translate(-50%,-50%) scale(${scale})`
+                            }}
                         />
                     ))}
                 </Slider>
@@ -160,7 +285,7 @@ function FourthSection() {
             <TextInfoField>
                 <InnerTextField>
                     <p className={classes.scrolInfo}>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                     <h3 className={classes.scrolhead}>Manish malhotra, Bruno's Dad</h3>
                     <p className={classes.scrolInfo}>Google . Dog Parent</p>
                 </InnerTextField>
