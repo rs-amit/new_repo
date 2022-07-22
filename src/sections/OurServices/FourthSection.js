@@ -172,7 +172,11 @@ const useStyles = makeStyles({
         "@media (max-width: 350px)": {
             width:'15px',
         },
+    },
+    imgContainer:{
+       border:'1px solid baack',
     }
+
 
 
 })
@@ -207,32 +211,13 @@ const InnerTextField = styled('div')({
 })
 
 
-const ImgArray = [img1, img2, img3, img4, img5, img6]
+const ImgArray = [img1, img2, img3, img4, img5,img6]
 
 function FourthSection() {
     const [currentImg, setCurrentImg] = useState(0)
     const [scale, setScale] = useState([])
 
     const classes = useStyles()
-
-    useEffect(()=>{
-        let total_number_of_carts = 5;
-        let middle_carts_by_index = Math.floor(total_number_of_carts / 2)
-        let new_scale = [];
-
-        for (let i = 0; i < 5; i++) {
-            if (i < middle_carts_by_index) { //left side deck 
-                (Math.pow(0.95, (middle_carts_by_index - i)))
-                new_scale.push(Math.pow(0.95, (middle_carts_by_index - i)))
-
-            }else{
-                setScale(Math.pow(0.95, (i - middle_carts_by_index)))
-                new_scale.push(Math.pow(0.95, (i - middle_carts_by_index)))
-            }
-        }
-
-    },[])
-
 
     const NextArrow = ({ onClick }) => {
         return (
@@ -255,6 +240,7 @@ function FourthSection() {
         lazyLoad: true,
         speed: 300,
         slidesToShow: 5,
+        slidesToScroll:1,
         centerMode: true,
         centerPadding: 0,
         nextArrow: <NextArrow />,
@@ -271,14 +257,11 @@ function FourthSection() {
             <div className={classes.slideContainer}>
                 <Slider {...setting}>
                     {ImgArray.map((img, index) => (
-                        <img
-                            src={img}
-                            alt=""
-                            className={index === currentImg ? classes.imgActive : classes.img}
-                            style={{
-                                transform:`translate(-50%,-50%) scale(${scale})`
-                            }}
-                        />
+                            <img
+                                src={img}
+                                alt=""
+                                className={index === currentImg ? classes.imgActive : classes.img}
+                            />
                     ))}
                 </Slider>
             </div>
